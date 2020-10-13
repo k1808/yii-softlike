@@ -16,6 +16,9 @@ class m201012_113834_create_city_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(128)->notNull(),
         ]);
+
+        $this->batchInsert('city', ['name'], [['Kiev'], ['New Yerk'], ['London'], ['Baku'],
+                                                    ['Moscow'], ['Yerevan'], ['Tunisia'], ['Minsk'],]);
     }
 
     /**

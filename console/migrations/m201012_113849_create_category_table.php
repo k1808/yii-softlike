@@ -16,6 +16,8 @@ class m201012_113849_create_category_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(128)->notNull(),
         ]);
+
+        $this->batchInsert('category', ['name'], [['cars'], ['closes'], ['food'], ['other']]);
     }
 
     /**
