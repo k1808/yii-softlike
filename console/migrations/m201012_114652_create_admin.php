@@ -13,7 +13,7 @@ class m201012_114652_create_admin extends Migration
         User::create(
           'admin',
           'admin@example.com',
-          '123456'
+          '111'
         );
     }
 

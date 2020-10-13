@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -35,15 +36,27 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        if (\Yii::$app->user->can('createProfile')) {
+            $menuItems = [
+              ['label' => 'Create profile', 'url' => ['/profile/create']],
+            ];
+        }
+
+        if (\Yii::$app->user->can('updateProfile')) {
+            $menuItems = [
+              ['label' => 'Profile', 'url' => Url::to(['/profile/view', 'id' => Yii::$app->user->identity->id])],
+            ];
+        }
+        /*$menuItems = [
+          ['label' => 'Profile', 'url' => ['/profile/create']],
+          ['label' => 'Shop', 'url' => ['/site/about']],
+          ['label' => '!!!!!!!!!!!!', 'url' => ['/site/contact']],
+        ];*/
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
