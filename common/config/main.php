@@ -1,4 +1,7 @@
 <?php
+
+use kartik\icons\Icon;
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -13,4 +16,7 @@ return [
             'class' => 'yii\rbac\DbManager',
         ],
     ],
+    'params' => [
+        'icon-framework' =>  Icon::FAS ,   // Фреймворк Font Awesome Icon
+    ]
 ];

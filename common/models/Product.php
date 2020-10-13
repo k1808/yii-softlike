@@ -12,7 +12,6 @@ use Yii;
  * @property int $category_id
  * @property int $price
  *
- * @property Order[] $orders
  * @property Category $category
  */
 class Product extends \yii\db\ActiveRecord
@@ -46,19 +45,9 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'category_id' => 'Category ID',
+            'category_id' => 'Category',
             'price' => 'Price',
         ];
-    }
-
-    /**
-     * Gets query for [[Orders]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrders()
-    {
-        return $this->hasMany(Order::className(), ['product_id' => 'id']);
     }
 
     /**

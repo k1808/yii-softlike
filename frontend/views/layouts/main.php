@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\components\MenuWidget;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -50,13 +51,10 @@ AppAsset::register($this);
         if (\Yii::$app->user->can('updateProfile')) {
             $menuItems = [
               ['label' => 'Profile', 'url' => Url::to(['/profile/view', 'id' => Yii::$app->user->identity->id])],
+              ['label' => 'Shop', 'url' => ['/shop/index']],
             ];
         }
-        /*$menuItems = [
-          ['label' => 'Profile', 'url' => ['/profile/create']],
-          ['label' => 'Shop', 'url' => ['/site/about']],
-          ['label' => '!!!!!!!!!!!!', 'url' => ['/site/contact']],
-        ];*/
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -78,7 +76,16 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="content-wrap">
+            <div class="sidebar">
+                <fieldset>
+                    <legend>Category</legend>
+                    <?=MenuWidget::widget()?>
+                </fieldset>
+            </div>
+            <div class="content"><?= $content ?></div>
+        </div>
+
     </div>
 </div>
 
