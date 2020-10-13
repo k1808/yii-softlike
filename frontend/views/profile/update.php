@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Profile */
+/* @var $countries common\models\Category */
+/* @var $cities common\models\City */
 
 $this->title = 'Update Profile: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
@@ -16,6 +18,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'countries' => $countries,
+        'cities' => $cities
     ]) ?>
 
 </div>

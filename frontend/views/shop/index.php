@@ -1,5 +1,6 @@
 <?php
 
+use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -9,14 +10,11 @@ use yii\widgets\Pjax;
 
 $this->title = 'Shop';
 $this->params['breadcrumbs'][] = $this->title;
+echo Yii::$app->controller->id;
 ?>
 <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -36,7 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'price',
 
-        ['class' => 'yii\grid\ActionColumn'],
+        ['class' => 'yii\grid\ActionColumn',
+          'template' => '{bay}',
+          'buttons' => [
+            'bay' => function ($url, $model, $key) {
+                return Html::a(FA::icon('cart-arrow-down'), $url, [
+                  'title' => 'Bay',
+                  'style'=>['font-size'=>'22px'],
+                  'data-pjax' => '0',
+                ]);
+            },
+          ],
+
+        ],
       ],
     ]); ?>
 

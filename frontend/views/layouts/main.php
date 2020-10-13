@@ -77,12 +77,14 @@ AppAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <div class="content-wrap">
+            <?php if(Yii::$app->controller->id === 'shop' || Yii::$app->controller->id === 'category'){?>
             <div class="sidebar">
                 <fieldset>
                     <legend>Category</legend>
                     <?=MenuWidget::widget()?>
                 </fieldset>
             </div>
+            <?php } ?>
             <div class="content"><?= $content ?></div>
         </div>
 

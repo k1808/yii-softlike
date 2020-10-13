@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\City;
+use common\models\Country;
 use Yii;
 use common\models\Profile;
 use frontend\models\search\ProfileSearch;
@@ -54,8 +56,6 @@ class ProfileController extends Controller
     {
 
         $profile = Profile::find()->where(['user_id'=>$id])->one();
-        //debug($profile);
-        //echo $profile->id;
 
         return $this->render('view', [
             'model' => $this->findModel($profile->id),
@@ -89,9 +89,13 @@ class ProfileController extends Controller
             $auth->assign($customerRole, $profile->user_id);
             return $this->redirect(['view', 'id' => $profile->id]);
         }
+        $countries = Country::find()->indexBy('id')->all();
+        $cities = City::find()->indexBy('id')->all();
 
         return $this->render('create', [
             'model' => $model,
+            'countries' => $countries,
+            'cities' => $cities
         ]);
     }
 
@@ -109,9 +113,13 @@ class ProfileController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        $countries = Country::find()->indexBy('id')->all();
+        $cities = City::find()->indexBy('id')->all();
 
         return $this->render('update', [
             'model' => $model,
+            'countries' => $countries,
+            'cities' => $cities
         ]);
     }
 
